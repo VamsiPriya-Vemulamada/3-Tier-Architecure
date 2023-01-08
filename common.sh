@@ -48,10 +48,19 @@ print "Extracting App Content"
   unzip -o /tmp/$COMPONENT.zip &>>$LOG
   STAT $?
 }
+
+#Configuration for communication between servers
  SYSTEMD_SETUP(){
    print "Configure the Endpoints for SystemD configuration"
    sed -i -e  's/MONGO_DNSNAME/dev-mongodb.devopsb69.online/' -e 's/REDIS_ENDPOINT/dev-redis.devopsb69.online/' -e 's/CATALOGUE_ENDPOINT/dev-catalogue.devopsb69.online/' -e 's/MONGO_ENDPOINT/dev-mongodb.devopsb69.online/' -e 's/CARTENDPOINT/dev-cart.devopsb69.online/' -e 's/DBHOST/dev-mysql.devopsb69.online/' -e 's/AMQPHOST/dev-rabbitmq.devopsb69.online/' -e 's/CARTHOST/dev-cart.devopsb69.online/' -e 's/USERHOST/dev-user.devopsb69.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
    mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
    STAT $?
- }
+
+
+PRINT "Restart $COMPONENT"
+systemctl daemon-reload &>>LOG && systemctl restart $COMPONENT &>>LOG && systemctl enable $COMPONENT &>>LOG
+STAT $?
+
+}
+
 
