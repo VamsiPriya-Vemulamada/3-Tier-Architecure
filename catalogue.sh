@@ -1,4 +1,4 @@
 COMPONENT=catalogue
-source coomon.sh
+source common.sh
 
 NODEJS
