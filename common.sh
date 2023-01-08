@@ -14,7 +14,7 @@ fi
 
 LOG=/tmp/$COMPONENT.log
 rm -f $LOG
-set-hostname $COMPONENT
+set-hostname -skip-apply $COMPONENT
 
 # Adding a User to the application
 DOWNLOAD_APP_CODE()
