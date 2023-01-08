@@ -25,14 +25,14 @@ set-hostname -skip-apply $COMPONENT
 # Adding a User to the application
 DOWNLOAD_APP_CODE()
 {
-#  if [ ! -z "$APP_USER" ]; then
-#  PRINT "Adding Application User"
-#  id roboshop &>>LOG
-#  if [ $? -ne 0 ]; then
-#    useradd roboshop &>>LOG
-#  fi
-#  STAT $?
-#  fi
+  if [ ! -z "$APP_USER" ]; then
+  PRINT "Adding Application User"
+  id roboshop &>>LOG
+  if [ $? -ne 0 ]; then
+    useradd roboshop &>>LOG
+  fi
+  STAT $?
+  fi
 
 
 PRINT "Download App Content"
