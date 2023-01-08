@@ -63,4 +63,27 @@ STAT $?
 
 }
 
+NODEJS()
+{
+  APP_LOC=/home/roboshop
+  CONTENT=$COMPONENT
+  APP_USER=roboshop
+  PRINT "Install NodeJS Repo"
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG
+    STAT $?
+
+PRINT "Install NodeJS"
+yum install nodejs -y &>>LOG
+STAT $?
+
+DOWNLOAD_APP_CODE
+mv $COMPONENT-MAIN $COMPONENT
+cd $COMPONENT
+
+PRINT "Install NodeJS Dependencies for App"
+npm install &>>LOG
+STAT $?
+SYSTEMD_SETUP
+}
+
 
