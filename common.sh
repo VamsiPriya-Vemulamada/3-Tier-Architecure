@@ -12,9 +12,15 @@ fi
 
 #Saving the component in temp folder
 
+#LOG=/tmp/$COMPONENT.log
+#rm -f $LOG
+#set-hostname -skip-apply $COMPONENT
+
+
 LOG=/tmp/$COMPONENT.log
 rm -f $LOG
 set-hostname -skip-apply $COMPONENT
+
 
 # Adding a User to the application
 #DOWNLOAD_APP_CODE()
