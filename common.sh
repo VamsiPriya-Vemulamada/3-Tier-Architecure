@@ -110,7 +110,28 @@ mvn clean package &>>$LOG  && mv target/$COMPONENT-1.0.jar $COMPONENT.jar &>>$LO
 
 }
 
+PYTHON()
+{
+  APP_LOC=/home/roboshop
+  CONTENT=$COMPONENT
+  APP_USER=roboshop
+   PRINT "Install Python"
+    yum install python36 gcc python3-devel -y &>>$LOG
+     STAT $?
+DOWNLOAD_APP_CODE
+mv $COMPONENT-main $COMPONENT
+cd $COMPONENT
 
+PRINT "Install Python Dependencies"
+  pip3 install -r requirements.txt  &>>$LOG
+  STAT $?
+
+  USER_ID=$(id -u roboshop)
+  GROUP_ID=$(id -g roboshop)
+  sed -i -e "/uid/ c uid = ${USER_ID}" -e "/uid/ c uid = ${GROUP_ID}" ${COMPONENT}.ini
+
+  SYSTEMD_SETUP
+}
 
 
 
